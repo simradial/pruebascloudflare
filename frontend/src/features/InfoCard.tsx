@@ -20,6 +20,17 @@ export default function InfoCard() {
     [optionObj, setOptionObj] = useState<object>({}),
     [useUTC, setUseUTC] = useState<boolean>(false),
     [sensorData, setSensorData] = useState<object>({});
+  const [posts, setPosts] = useState(222);
+
+  useEffect(() => {
+    const getTest = async () => {
+      const resp = await fetch("/test");
+      const testResp = await resp.json();
+      setPosts(testResp);
+    };
+
+    getTest();
+  }, []);
 
   useEffect(() => {
     setOptionObj({
@@ -144,7 +155,7 @@ export default function InfoCard() {
             color={"yellow.500"}
             rounded={"full"}
           >
-            TEMPCHECK
+            {posts}
           </Text>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>Temp</Text>
