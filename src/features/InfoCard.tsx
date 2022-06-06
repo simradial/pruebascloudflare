@@ -20,8 +20,8 @@ export default function InfoCard() {
     [optionObj, setOptionObj] = useState<object>({}),
     [useUTC, setUseUTC] = useState<boolean>(false),
     [sensorData, setSensorData] = useState<object>({});
-  const [test, setTest] = useState(222);
-  const [time, setTime] = useState("na");
+  const [test, setTest] = useState(333);
+  const [time, setTime] = useState("NULL");
 
   useEffect(() => {
     const getTest = async () => {
