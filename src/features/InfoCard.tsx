@@ -25,12 +25,12 @@ export default function InfoCard() {
 
   useEffect(() => {
     const getTest = async () => {
-      const resp = await fetch("/test");
+      const resp = await fetch("/api/test");
       const testResp = await resp.json();
       setTest(testResp);
     };
     const getTime = async () => {
-      const resp = await fetch("/time");
+      const resp = await fetch("/api/time");
       const timeResp = await resp.json();
       setTime(timeResp);
     };
