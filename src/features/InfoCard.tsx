@@ -21,11 +21,11 @@ export default function InfoCard() {
     [useUTC, setUseUTC] = useState<boolean>(false),
     [sensorData, setSensorData] = useState<object>({});
   const [test, setTest] = useState(333);
-  const [time, setTime] = useState("NULL");
+  const [time, setTime] = useState("");
 
   useEffect(() => {
     const getTest = async () => {
-      const resp = await fetch("/api/test");
+      const resp = await fetch("/test");
       const testResp = await resp.json();
       setTest(testResp);
     };
@@ -35,7 +35,7 @@ export default function InfoCard() {
       setTime(timeResp);
     };
     getTest();
-    getTime();
+    //getTime();
   }, []);
 
   useEffect(() => {
