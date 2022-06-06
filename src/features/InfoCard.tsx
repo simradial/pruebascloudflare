@@ -20,12 +20,12 @@ export default function InfoCard() {
     [optionObj, setOptionObj] = useState<object>({}),
     [useUTC, setUseUTC] = useState<boolean>(false),
     [sensorData, setSensorData] = useState<object>({});
-  const [test, setTest] = useState("test");
+  const [test, setTest] = useState("Prueba");
   const [time, setTime] = useState("");
 
   useEffect(() => {
     const getTest = async () => {
-      const resp = await fetch("/test");
+      const resp = await fetch("/test/1");
       const testResp = await resp.json();
       setTest(testResp);
     };
