@@ -1,3 +1,7 @@
 export async function onRequest({ env }) {
-  return new Response(env.TEST_VAR);
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Content-type": "application/json",
+  };
+  return new Response(env.TEST_VAR, { headers });
 }

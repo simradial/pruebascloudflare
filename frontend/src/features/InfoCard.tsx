@@ -20,16 +20,22 @@ export default function InfoCard() {
     [optionObj, setOptionObj] = useState<object>({}),
     [useUTC, setUseUTC] = useState<boolean>(false),
     [sensorData, setSensorData] = useState<object>({});
-  const [posts, setPosts] = useState(222);
+  const [test, setTest] = useState(222);
+  const [time, setTime] = useState("na");
 
   useEffect(() => {
     const getTest = async () => {
       const resp = await fetch("/test");
       const testResp = await resp.json();
-      setPosts(testResp);
+      setTest(testResp);
     };
-
+    const getTime = async () => {
+      const resp = await fetch("/time");
+      const timeResp = await resp.json();
+      setTime(timeResp);
+    };
     getTest();
+    getTime();
   }, []);
 
   useEffect(() => {
@@ -155,7 +161,18 @@ export default function InfoCard() {
             color={"yellow.500"}
             rounded={"full"}
           >
-            {posts}
+            {test}
+          </Text>
+          <Text
+            fontSize={"sm"}
+            fontWeight={500}
+            bg={useColorModeValue("yellow.50", "yellow.900")}
+            p={2}
+            px={3}
+            color={"yellow.500"}
+            rounded={"full"}
+          >
+            {time}
           </Text>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>Temp</Text>

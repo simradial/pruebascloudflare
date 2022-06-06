@@ -1,5 +1,9 @@
 // ./functions/time.js
 
 export const onRequest = () => {
-  return new Response(new Date().toISOString());
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Content-type": "application/json",
+  };
+  return new Response(new Date().toISOString(), { headers });
 };
