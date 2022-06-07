@@ -131,8 +131,6 @@ export default function InfoCard() {
     });
   }, []);
 
-  if (error) return <div>Failed to load API</div>;
-
   return (
     <Center py={6}>
       <Box
@@ -158,7 +156,7 @@ export default function InfoCard() {
             color={"yellow.500"}
             rounded={"full"}
           >
-            {!data ? "Loading..." : data.name}
+            {error ? "Error loading API" : !data ? "Loading..." : data.name}
           </Text>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>Temp</Text>
