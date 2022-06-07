@@ -14,29 +14,24 @@ import { TimeIcon } from "@chakra-ui/icons";
 import { DateTime } from "luxon";
 import * as echarts from "echarts";
 import ReactECharts from "echarts-for-react";
+import useSWR from "swr";
+
+const fetcher = async (
+  input: RequestInfo,
+  init: RequestInit,
+  ...args: any[]
+) => {
+  const res = await fetch(input, init);
+  return res.json();
+};
 
 export default function InfoCard() {
   const theme = useColorModeValue("light", "dark"),
     [optionObj, setOptionObj] = useState<object>({}),
     [useUTC, setUseUTC] = useState<boolean>(false),
     [sensorData, setSensorData] = useState<object>({});
-  const [test, setTest] = useState("Prueba");
-  const [time, setTime] = useState("");
 
-  useEffect(() => {
-    const getTest = async () => {
-      const resp = await fetch("/test/1");
-      const testResp = await resp.json();
-      setTest(testResp);
-    };
-    const getTime = async () => {
-      const resp = await fetch("/api/time");
-      const timeResp = await resp.json();
-      setTime(timeResp);
-    };
-    getTest();
-    //getTime();
-  }, []);
+  const { data, error } = useSWR("/character/1", fetcher);
 
   useEffect(() => {
     setOptionObj({
@@ -136,6 +131,8 @@ export default function InfoCard() {
     });
   }, []);
 
+  if (error) return <div>Failed to load API</div>;
+
   return (
     <Center py={6}>
       <Box
@@ -161,7 +158,7 @@ export default function InfoCard() {
             color={"yellow.500"}
             rounded={"full"}
           >
-            {test}
+            {!data ? "Loading..." : data.name}
           </Text>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>Temp</Text>
