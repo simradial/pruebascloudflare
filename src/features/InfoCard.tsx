@@ -34,8 +34,9 @@ export default function InfoCard() {
   const { data, error } = useSWR("/api/sensorpush", fetcher);
 
   useEffect(() => {
-    const val = JSON.parse(data!);
-    setSensorData(val);
+    //const val = JSON.parse(data!);
+    //setSensorData(val);
+    console.log("data ", data);
   }, [data]);
 
   useEffect(() => {
@@ -136,6 +137,8 @@ export default function InfoCard() {
     });
   }, []);
 
+  /////////////////////////////
+
   return (
     <Center py={6}>
       <Box
@@ -189,7 +192,7 @@ export default function InfoCard() {
               <ListIcon as={TimeIcon} color="yellow.400" />
               {DateTime.now().toFormat("hh:mm:ss MMMM dd, yyyy")}
             </ListItem>
-            <ListItem>{JSON.stringify(sensorData)}</ListItem>
+            {/* <ListItem>{JSON.stringify(sensorData)}</ListItem> */}
           </List>
         </Box>
 
