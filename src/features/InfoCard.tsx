@@ -34,16 +34,6 @@ export default function InfoCard() {
   const { data, error } = useSWR("/api/sensorpush", fetcher);
 
   useEffect(() => {
-    //const val = JSON.parse(data!);
-    //setSensorData(val);
-    const datacopy: any = { ...data };
-    console.log("datacopy ", datacopy);
-    console.log("hum ", datacopy.hum);
-    console.log("temp ", datacopy.temp);
-    console.log("ts ", datacopy.ts);
-  }, [data]);
-
-  useEffect(() => {
     setOptionObj({
       useUTC: useUTC,
       title: {
@@ -177,14 +167,14 @@ export default function InfoCard() {
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>Temp</Text>
             <Text fontSize={"6xl"} fontWeight={800}>
-              {73.8}
+              {!data ? "-" : data.temp}
             </Text>
-            <Text color={"gray.500"}>°F</Text>
+            <Text color={"gray.500"}>°C</Text>
           </Stack>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"1xl"}>Humidity</Text>
             <Text fontSize={"3xl"} fontWeight={800}>
-              {69.3}
+              {!data ? "-" : data.hum}
             </Text>
             <Text color={"gray.500"}>%</Text>
           </Stack>
@@ -194,7 +184,8 @@ export default function InfoCard() {
           <List spacing={3}>
             <ListItem>
               <ListIcon as={TimeIcon} color="yellow.400" />
-              {DateTime.now().toFormat("hh:mm:ss MMMM dd, yyyy")}
+              {!data ? "-" : data.ts}
+              {/* {DateTime.now().toFormat("hh:mm:ss MMMM dd, yyyy")} */}
             </ListItem>
             {/* <ListItem>{JSON.stringify(sensorData)}</ListItem> */}
           </List>
