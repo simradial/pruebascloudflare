@@ -156,12 +156,11 @@ export default function InfoCard() {
             color={"yellow.500"}
             rounded={"full"}
           >
-            {/* {error
+            {error
               ? "Error loading API"
               : !data
               ? "Loading..."
-              : JSON.stringify(data)} */}
-              {'Vieques, PR'}
+              : JSON.stringify(data)}
           </Text>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>Temp</Text>
@@ -183,7 +182,7 @@ export default function InfoCard() {
           <List spacing={3}>
             <ListItem>
               <ListIcon as={TimeIcon} color="yellow.400" />
-              {DateTime.(data.ts).toFormat("hh:mm:ss MMMM dd, yyyy")}
+              {DateTime.now().toFormat("hh:mm:ss MMMM dd, yyyy")}
             </ListItem>
           </List>
         </Box>
