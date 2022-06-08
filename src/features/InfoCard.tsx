@@ -34,6 +34,11 @@ export default function InfoCard() {
   const { data, error } = useSWR("/api/sensorpush", fetcher);
 
   useEffect(() => {
+    const val = JSON.parse(data!);
+    setSensorData(val);
+  }, [data]);
+
+  useEffect(() => {
     setOptionObj({
       useUTC: useUTC,
       title: {
@@ -165,14 +170,14 @@ export default function InfoCard() {
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>Temp</Text>
             <Text fontSize={"6xl"} fontWeight={800}>
-              {data.temp}
+              {73.8}
             </Text>
-            <Text color={"gray.500"}>°C</Text>
+            <Text color={"gray.500"}>°F</Text>
           </Stack>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"1xl"}>Humidity</Text>
             <Text fontSize={"3xl"} fontWeight={800}>
-              {data.hum}
+              {69.3}
             </Text>
             <Text color={"gray.500"}>%</Text>
           </Stack>
@@ -184,6 +189,7 @@ export default function InfoCard() {
               <ListIcon as={TimeIcon} color="yellow.400" />
               {DateTime.now().toFormat("hh:mm:ss MMMM dd, yyyy")}
             </ListItem>
+            <ListItem>{JSON.stringify(sensorData)}</ListItem>
           </List>
         </Box>
 

@@ -17,12 +17,6 @@ export async function onRequestGet({ params, env }) {
 
     //const sample = await env.SENSORS_KV.get("1") // hardcode sensor 1
     return new Response(value)
-
-    // return new Response(JSON.stringify({
-    //     "Status": 200,
-    //     'headers': { "Content-Type": "application/json" },
-    //     "Message": JSON.stringify(sample)
-    // })
 }
 
 
