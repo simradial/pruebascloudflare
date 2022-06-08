@@ -183,7 +183,11 @@ export default function InfoCard() {
           <List spacing={3}>
             <ListItem>
               <ListIcon as={TimeIcon} color="yellow.400" />
-              {!data ? "-" : DateTime.fromSeconds(data.ts).toFormat("hh:mm:ss MMMM dd, yyyy")}}
+              {!data
+                ? "-"
+                : DateTime.fromSeconds(data.ts).toFormat(
+                    "hh:mm:ss MMMM dd, yyyy"
+                  )}
             </ListItem>
           </List>
         </Box>
