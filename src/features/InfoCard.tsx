@@ -7,7 +7,6 @@ import {
   List,
   ListItem,
   ListIcon,
-  Button,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { TimeIcon } from "@chakra-ui/icons";
@@ -167,14 +166,14 @@ export default function InfoCard() {
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>Temp</Text>
             <Text fontSize={"6xl"} fontWeight={800}>
-              {!data ? "-" : data.temp}
+              {!data ? "-" : data.temp.toFixed(2)}
             </Text>
             <Text color={"gray.500"}>°C</Text>
           </Stack>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"1xl"}>Humidity</Text>
             <Text fontSize={"3xl"} fontWeight={800}>
-              {!data ? "-" : data.hum}
+              {!data ? "-" : data.hum.toFixed(2)}
             </Text>
             <Text color={"gray.500"}>%</Text>
           </Stack>
@@ -184,10 +183,8 @@ export default function InfoCard() {
           <List spacing={3}>
             <ListItem>
               <ListIcon as={TimeIcon} color="yellow.400" />
-              {!data ? "-" : data.ts}
-              {/* {DateTime.now().toFormat("hh:mm:ss MMMM dd, yyyy")} */}
+              {!data ? "-" : DateTime.fromSeconds(data.ts).toFormat("hh:mm:ss MMMM dd, yyyy")}}
             </ListItem>
-            {/* <ListItem>{JSON.stringify(sensorData)}</ListItem> */}
           </List>
         </Box>
 
