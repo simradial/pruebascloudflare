@@ -7,6 +7,25 @@ import { SensorReading } from '../../../global/types'
 //     return suppliedKey == authKey
 // }
 
+
+export async function onRequestGet({ params, env }) {
+    // if (!checkAuth(request, SENSORS_READ)) {
+    //     return new Response("Invalid Key", { status: 403 })
+    // } 
+    const value = await env.SENSORS_KV.get("1") // hardcode sensor 1
+    //let sample: SensorReading = JSON.parse(value!)
+
+    //const sample = await env.SENSORS_KV.get("1") // hardcode sensor 1
+    return new Response(value)
+
+    // return new Response(JSON.stringify({
+    //     "Status": 200,
+    //     'headers': { "Content-Type": "application/json" },
+    //     "Message": JSON.stringify(sample)
+    // })
+}
+
+
 export async function onRequestPost({ params, request, env }) {
 
   // if (!checkAuth(request, SENSORS_WRITE)) {
