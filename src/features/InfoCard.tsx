@@ -37,6 +37,9 @@ export default function InfoCard() {
     //const val = JSON.parse(data!);
     //setSensorData(val);
     console.log("data ", data);
+    console.log("hum ", data.hum);
+    console.log("temp ", data.temp);
+    console.log("ts ", data.ts);
   }, [data]);
 
   useEffect(() => {
