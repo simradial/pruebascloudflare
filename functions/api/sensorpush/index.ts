@@ -32,7 +32,7 @@ export async function onRequestPost({ params, request, env }) {
       }
 
       // store sample in KV
-      await env.TEMPCHECK.SENSORS_KV.put("1", JSON.stringify(sample))
+      await env.TEMPCHECK.put("SENSORS_KV", JSON.stringify(sample))
 
       // // POST sample to InfluxDB
       // const influxURL = `${INFLUX_BASE_URL}/api/v2/write?org=${INFLUX_ORG}&bucket=${INFLUX_BUCKET}&precision=ns`
