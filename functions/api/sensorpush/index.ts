@@ -38,27 +38,27 @@ export async function onRequestPost({ params, request, env }) {
 
       const envtest = env.TEST_VAR
 
-      // // POST sample to InfluxDB
-      // const influxURL = `${INFLUX_BASE_URL}/api/v2/write?org=${INFLUX_ORG}&bucket=${INFLUX_BUCKET}&precision=ns`
-      // const influxPost = {
-      //     method: "POST",
-      //     headers: {
-      //         "Content-Type": "text/plain; charset=utf-8",
-      //         "Accept": "application/json",
-      //         "Authorization": `Token ${INFLUX_API_TOKEN}`
-      //     },
-      //     body: `airSensors,sensor_id=WMS01 timestamp=${(sample.ts)/1000.0},temperature=${sample.temp.toFixed(2)},humidity=${sample.hum.toFixed(2)}`
-      // }
-      // const influxResponse = await fetch(influxURL, influxPost)
-      // if (!influxResponse.ok) {
-      //     // Forward bad response
-      //     return influxResponse;
-      // }
+      // POST sample to InfluxDB
+      const influxURL = `${env.INFLUX_BASE_URL}/api/v2/write?org=${env.INFLUX_ORG}&bucket=${env.INFLUX_BUCKET}&precision=ns`
+      const influxPost = {
+          method: "POST",
+          headers: {
+              "Content-Type": "text/plain; charset=utf-8",
+              "Accept": "application/json",
+              "Authorization": `Token ${env.INFLUX_API_TOKEN}`
+          },
+          body: `airSensors,sensor_id=WMS01 timestamp=${(sample.ts)/1000.0},temperature=${sample.temp.toFixed(2)},humidity=${sample.hum.toFixed(2)}`
+      }
+      const influxResponse = await fetch(influxURL, influxPost)
+      if (!influxResponse.ok) {
+          // Forward bad response
+          return influxResponse;
+      }
 
       return new Response(JSON.stringify({
           "Status": 200,
           'headers': { "Content-Type": "application/json" },
-          "Message": `envtest TEST_VAR = ${envtest}`
+          "Message": JSON.stringify(influxResponse)
       }))
   } catch (e: any) {
       return new Response(JSON.stringify({
