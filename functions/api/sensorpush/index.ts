@@ -7,7 +7,7 @@
 // }
 
 
-//import { SensorReading } from '../../../global/types'
+import { SensorReading } from '../../../global/types'
 
 // export async function onRequestPost(request:any) {
 //       // const body = await request.clone().text()
@@ -25,11 +25,11 @@ export async function onRequestPost(request: Request): Promise<Response> {
   // } 
 
   try {
-    //   const body = await request.clone().text()
-    //   let sample: SensorReading = JSON.parse(body)
-    //   if (sample.ts === undefined) {
-    //       sample.ts = Date.now()
-    //   }
+      const body = await request.clone().text()
+      let sample: SensorReading = JSON.parse(body)
+      if (sample.ts === undefined) {
+          sample.ts = Date.now()
+      }
 
       // // store sample in KV
       // await SENSORS_KV.put("1", JSON.stringify(sample)) // hardcoded sensor 1
@@ -55,7 +55,7 @@ export async function onRequestPost(request: Request): Promise<Response> {
       return new Response(JSON.stringify({
           "Status": 200,
           'headers': { "Content-Type": "application/json" },
-          "Message": 'Test'
+          "Message": JSON.stringify(sample)
       }))
   } catch (e: any) {
       return new Response(JSON.stringify({
