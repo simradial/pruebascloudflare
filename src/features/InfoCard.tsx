@@ -161,7 +161,7 @@ export default function InfoCard() {
               ? "Error loading API"
               : !data
               ? "Loading..."
-              : JSON.stringify(data)}
+              : "Monte Carmelo, Vieques "}
           </Text>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>Temp</Text>
@@ -185,7 +185,7 @@ export default function InfoCard() {
               <ListIcon as={TimeIcon} color="yellow.400" />
               {!data
                 ? "-"
-                : DateTime.fromSeconds(data.ts).toFormat(
+                : DateTime.fromMillis(data.ts).toFormat(
                     "hh:mm:ss MMMM dd, yyyy"
                   )}
             </ListItem>
