@@ -32,7 +32,7 @@ export async function onRequestPost({ params, request, env }) {
       }
 
       // store sample in KV
-      await env.TEMPCHECK.put("SENSORS_KV:1", JSON.stringify(sample)) // hardcoded sensor 1
+      await env.TEMPCHECK.put("SENSORS_KV:1", JSON.stringify(sample))
 
       // // POST sample to InfluxDB
       // const influxURL = `${INFLUX_BASE_URL}/api/v2/write?org=${INFLUX_ORG}&bucket=${INFLUX_BUCKET}&precision=ns`
@@ -45,7 +45,6 @@ export async function onRequestPost({ params, request, env }) {
       //     },
       //     body: `airSensors,sensor_id=WMS01 timestamp=${(sample.ts)/1000.0},temperature=${sample.temp.toFixed(2)},humidity=${sample.hum.toFixed(2)}`
       // }
-      
       // const influxResponse = await fetch(influxURL, influxPost)
       // if (!influxResponse.ok) {
       //     // Forward bad response
