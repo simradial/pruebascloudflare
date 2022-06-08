@@ -18,14 +18,14 @@ import { SensorReading } from '../../../global/types'
 
 //   return new Response(`Hello world`);
 // }
+export async function onRequestPost({ params, request }) {
 
-export async function onRequestPost(request: Request): Promise<Response> {
   // if (!checkAuth(request, SENSORS_WRITE)) {
   //     return new Response("Invalid Key", { status: 403 })
   // } 
 
   try {
-      const body:any = await request
+      const body:any = await request.clone().text()
       let sample: SensorReading = JSON.parse(body)
       if (sample.ts === undefined) {
           sample.ts = Date.now()
