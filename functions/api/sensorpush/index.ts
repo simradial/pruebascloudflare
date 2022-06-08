@@ -20,7 +20,7 @@ import { SensorReading } from '../../../global/types'
 // }
 // let TEMPCHECK:any
 
-export async function onRequestPostfetch(request:any, env:any, context:any) {
+export async function onRequestPost({ params, request, env }) {
 
   // if (!checkAuth(request, SENSORS_WRITE)) {
   //     return new Response("Invalid Key", { status: 403 })
@@ -34,7 +34,7 @@ export async function onRequestPostfetch(request:any, env:any, context:any) {
       }
 
       // store sample in KV
-      await env.TEMPCHECK.put("SENSORS_KV", JSON.stringify(sample))
+      //await env.TEMPCHECK.put("SENSORS_KV", JSON.stringify(sample))
 
       // // POST sample to InfluxDB
       // const influxURL = `${INFLUX_BASE_URL}/api/v2/write?org=${INFLUX_ORG}&bucket=${INFLUX_BUCKET}&precision=ns`
