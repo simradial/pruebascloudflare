@@ -18,7 +18,9 @@ import { SensorReading } from '../../../global/types'
 
 //   return new Response(`Hello world`);
 // }
-export async function onRequestPost(request:any) {
+let TEMPCHECK:any
+
+export async function onRequestPost({ params, request, env }) {
 
   // if (!checkAuth(request, SENSORS_WRITE)) {
   //     return new Response("Invalid Key", { status: 403 })
