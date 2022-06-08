@@ -36,6 +36,8 @@ export async function onRequestPost({ params, request, env }) {
       // store sample in KV
       await env.SENSORS_KV.put("1", JSON.stringify(sample))
 
+      const envtest = env.TEST_VAR
+
       // // POST sample to InfluxDB
       // const influxURL = `${INFLUX_BASE_URL}/api/v2/write?org=${INFLUX_ORG}&bucket=${INFLUX_BUCKET}&precision=ns`
       // const influxPost = {
@@ -56,7 +58,7 @@ export async function onRequestPost({ params, request, env }) {
       return new Response(JSON.stringify({
           "Status": 200,
           'headers': { "Content-Type": "application/json" },
-          "Message": JSON.stringify(sample)
+          "Message": `envtest TEST_VAR = ${envtest}`
       }))
   } catch (e: any) {
       return new Response(JSON.stringify({
