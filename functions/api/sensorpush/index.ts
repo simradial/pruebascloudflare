@@ -18,7 +18,7 @@ import { SensorReading } from '../../../global/types'
 
 //   return new Response(`Hello world`);
 // }
-export async function onRequestPost({ params, request, env }) {
+export async function onRequestPost(request:any) {
 
   // if (!checkAuth(request, SENSORS_WRITE)) {
   //     return new Response("Invalid Key", { status: 403 })
@@ -32,7 +32,7 @@ export async function onRequestPost({ params, request, env }) {
       }
 
       // store sample in KV
-      await env.TEMPCHECK.put("SENSORS_KV", JSON.stringify(sample))
+      await TEMPCHECK.put("SENSORS_KV", JSON.stringify(sample))
 
       // // POST sample to InfluxDB
       // const influxURL = `${INFLUX_BASE_URL}/api/v2/write?org=${INFLUX_ORG}&bucket=${INFLUX_BUCKET}&precision=ns`
