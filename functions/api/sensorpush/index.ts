@@ -25,7 +25,7 @@ export async function onRequestPost(request: Request): Promise<Response> {
   // } 
 
   try {
-      const body = await request.clone().text()
+      const body = await request.text()
       let sample: SensorReading = JSON.parse(body)
       if (sample.ts === undefined) {
           sample.ts = Date.now()
