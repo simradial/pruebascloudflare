@@ -36,10 +36,11 @@ export default function InfoCard() {
   useEffect(() => {
     //const val = JSON.parse(data!);
     //setSensorData(val);
-    console.log("data ", data);
-    console.log("hum ", data.hum);
-    console.log("temp ", data.temp);
-    console.log("ts ", data.ts);
+    const datacopy: any = { ...data };
+    console.log("datacopy ", datacopy);
+    console.log("hum ", datacopy.hum);
+    console.log("temp ", datacopy.temp);
+    console.log("ts ", datacopy.ts);
   }, [data]);
 
   useEffect(() => {
