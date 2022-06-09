@@ -41,8 +41,8 @@ export async function onRequestGet({ params, env }) {
   let sensorDataStr: string = "[";
   results.data.forEach((d: any): void => {
     const ts = d["timestamp"];
-    const newdate: Date = new Date(1000 * ts);
-    const newdateiso = newdate.toISOString();
+    let newdate: Date = new Date(1000 * ts);
+    let newdateiso = newdate.toISOString();
     //("2022-06-09T08:00:00");
     if (ts !== null && ts !== undefined) {
       if (sensorDataStr.length !== 1) {
