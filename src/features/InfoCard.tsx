@@ -24,6 +24,11 @@ const fetcher = async (
   return res.json();
 };
 
+function convertToF(celsius: number) {
+  let fahrenheit = (celsius * 9) / 5 + 32;
+  return fahrenheit;
+}
+
 export default function InfoCard() {
   const theme = useColorModeValue("light", "dark"),
     [optionObj, setOptionObj] = useState<object>({}),
@@ -166,9 +171,9 @@ export default function InfoCard() {
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>Temp</Text>
             <Text fontSize={"6xl"} fontWeight={800}>
-              {!data ? "-" : data.temp.toFixed(2)}
+              {!data ? "-" : convertToF(data.temp).toFixed(2)}
             </Text>
-            <Text color={"gray.500"}>°C</Text>
+            <Text color={"gray.500"}>°F</Text>
           </Stack>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"1xl"}>Humidity</Text>
