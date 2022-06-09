@@ -116,10 +116,10 @@ export default function InfoCard() {
           },
         },
       ],
-      dataset: {
-        source: sensorData,
-        dimensions: ["timestamp", "temp", "hum"],
-      },
+      // dataset: {
+      //   source: sensorData,
+      //   dimensions: ["timestamp", "temp", "hum"],
+      // },
       series: [
         {
           name: "Temp °F",
@@ -144,7 +144,7 @@ export default function InfoCard() {
         },
       ],
     });
-  }, [sensorData]);
+  }, []);
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
