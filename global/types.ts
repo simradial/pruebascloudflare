@@ -1,5 +1,5 @@
 export interface SensorReading {
-    title?:  string; // Display Title
+    title?:  String; // Display Title
     ts?:  number; // Timestamp
     temp: number; // Celsius
     hum:  number; // Humidity

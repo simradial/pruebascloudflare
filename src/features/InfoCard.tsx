@@ -166,7 +166,7 @@ export default function InfoCard() {
               ? "Error loading API"
               : !data
               ? "-"
-              : !data.title
+              : data.title
               ? data.title
               : "TEMPCHECK"}
           </Text>
