@@ -166,8 +166,8 @@ export default function InfoCard() {
               ? "Error loading API"
               : !data
               ? "-"
-              : data.title
-              ? data.title
+              : data.txt
+              ? data.txt
               : "TEMPCHECK"}
           </Text>
           <Stack direction={"row"} align={"center"} justify={"center"}>
