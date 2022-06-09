@@ -41,10 +41,10 @@ export default function InfoCard() {
     );
 
   useEffect(() => {
-    if (timeseries_data) {
+    if (!timeseries_error && timeseries_data) {
       const newdata = { ...timeseries_data };
       console.log(newdata);
-      setSensorData(newdata);
+      //setSensorData(newdata);
     }
   }, [timeseries_data]);
 
