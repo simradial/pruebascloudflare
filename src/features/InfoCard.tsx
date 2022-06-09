@@ -33,9 +33,18 @@ export default function InfoCard() {
   const theme = useColorModeValue("light", "dark"),
     [optionObj, setOptionObj] = useState<object>({}),
     [useUTC, setUseUTC] = useState<boolean>(false),
-    [sensorData, setSensorData] = useState<object>({});
+    [sensorData, setSensorData] = useState<object>({}),
+    { data, error } = useSWR("/api/sensor/1", fetcher),
+    { data: timeseries_data, error: timeseries_error } = useSWR(
+      "/api/timeseries",
+      fetcher
+    );
 
-  const { data, error } = useSWR("/api/sensorpush", fetcher);
+  useEffect(() => {
+    if (timeseries_data) {
+      setSensorData(timeseries_data);
+    }
+  }, [timeseries_data]);
 
   useEffect(() => {
     setOptionObj({
@@ -105,10 +114,10 @@ export default function InfoCard() {
           },
         },
       ],
-      //   dataset: {
-      //     source: sensorData,
-      //     dimensions: ["timestamp", "temp", "hum"],
-      //   },
+      dataset: {
+        source: sensorData,
+        dimensions: ["timestamp", "temp", "hum"],
+      },
       series: [
         {
           name: "Temp °F",
@@ -133,7 +142,7 @@ export default function InfoCard() {
         },
       ],
     });
-  }, []);
+  }, [sensorData]);
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -166,7 +175,7 @@ export default function InfoCard() {
               ? "Error loading API"
               : !data
               ? "-"
-              : data.txt
+              : !data.txt
               ? data.txt
               : "TEMPCHECK"}
           </Text>
@@ -192,9 +201,9 @@ export default function InfoCard() {
               <ListIcon as={TimeIcon} color="yellow.400" />
               {!data
                 ? "-"
-                : DateTime.fromMillis(data.ts).toFormat(
-                    "hh:mm:ss MMMM dd, yyyy"
-                  )}
+                : DateTime.fromMillis(data.ts)
+                    .setZone("America/New_York")
+                    .toFormat("yyyy-LL-dd HH:mm:ss ZZZZ")}
             </ListItem>
           </List>
         </Box>
@@ -202,7 +211,7 @@ export default function InfoCard() {
         <Box bg={useColorModeValue("gray.50", "gray.900")} px={6} py={10}>
           <ReactECharts
             theme={theme}
-            option={optionObj}
+            option={}
             style={{ width: "100%", height: "100%" }}
           />
         </Box>
