@@ -213,7 +213,7 @@ export default function InfoCard() {
         <Box bg={useColorModeValue("gray.50", "gray.900")} px={6} py={10}>
           <ReactECharts
             theme={theme}
-            option={optionObj}
+            option={{}}
             style={{ width: "100%", height: "100%" }}
           />
         </Box>
