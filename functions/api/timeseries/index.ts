@@ -41,15 +41,15 @@ export async function onRequestGet({ params, env }) {
   let sensorDataStr: string = "[";
   results.data.forEach((d: any): void => {
     const ts = d["timestamp"];
-    let newdate: Date = new Date(1000 * ts);
-    let newdateiso = newdate.toISOString();
-    //("2022-06-09T08:00:00");
+    const newdate = new Date(1000 * ts);
     if (ts !== null && ts !== undefined) {
       if (sensorDataStr.length !== 1) {
         sensorDataStr += ",";
       }
       const tempF = (d["temperature"] * 9.0) / 5.0 + 32.0;
-      sensorDataStr += `[${newdateiso}, ${tempF.toFixed(2)}, ${d["humidity"]}]`;
+      sensorDataStr += `[new Date(${1000 * ts}), ${tempF.toFixed(2)}, ${
+        d["humidity"]
+      }]`;
     }
   });
   sensorDataStr += "]";
