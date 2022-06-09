@@ -42,7 +42,9 @@ export default function InfoCard() {
 
   useEffect(() => {
     if (timeseries_data) {
-      setSensorData(timeseries_data);
+      const newdata = { ...timeseries_data };
+      console.log(newdata);
+      setSensorData(newdata);
     }
   }, [timeseries_data]);
 
@@ -211,7 +213,7 @@ export default function InfoCard() {
         <Box bg={useColorModeValue("gray.50", "gray.900")} px={6} py={10}>
           <ReactECharts
             theme={theme}
-            option={}
+            option={optionObj}
             style={{ width: "100%", height: "100%" }}
           />
         </Box>
