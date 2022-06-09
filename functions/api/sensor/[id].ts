@@ -16,10 +16,7 @@ export async function onRequestGet({ params, env }) {
   // if (!checkAuth(request, SENSORS_READ)) {
   //     return new Response("Invalid Key", { status: 403 })
   // }
-  const value = await env.SENSORS_KV.get(String(params.id)); // hardcode sensor 1
-  //let sample: SensorReading = JSON.parse(value!)
-
-  //const sample = await env.SENSORS_KV.get("1") // hardcode sensor 1
+  const value = await env.SENSORS_KV.get(String(params.id));
   return new Response(value);
 }
 
