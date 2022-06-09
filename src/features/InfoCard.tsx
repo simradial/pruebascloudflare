@@ -135,7 +135,7 @@ export default function InfoCard() {
     });
   }, []);
 
-  /////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <Center py={6}>
@@ -165,8 +165,10 @@ export default function InfoCard() {
             {error
               ? "Error loading API"
               : !data
-              ? "Loading..."
-              : "Monte Carmelo, Vieques "}
+              ? "-"
+              : !data.title
+              ? data.title
+              : "TEMPCHECK"}
           </Text>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>Temp</Text>
