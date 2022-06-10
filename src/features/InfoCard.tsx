@@ -52,10 +52,10 @@ export default function InfoCard() {
     );
 
   useEffect(() => {
-    console.log("timeseries_data ", timeseries_data);
-    // if (timeseries_data) {
-    //   setSensorData(timeseries_data);
-    // }
+    //console.log("timeseries_data ", timeseries_data);
+    if (timeseries_data) {
+      setSensorData(timeseries_data);
+    }
   }, [timeseries_data]);
 
   useEffect(() => {
