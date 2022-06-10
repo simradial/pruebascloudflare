@@ -33,7 +33,7 @@ export default function InfoCard() {
   const theme = useColorModeValue("light", "dark"),
     [optionObj, setOptionObj] = useState<object>({}),
     [useUTC, setUseUTC] = useState<boolean>(false),
-    [sensorData, setSensorData] = useState<object>({}),
+    [sensorData, setSensorData] = useState<any>([[0, 0, 0]]),
     { data, error } = useSWR("/api/sensor/1", fetcher),
     { data: timeseries_data, error: timeseries_error } = useSWR(
       "/api/timeseries",
@@ -41,10 +41,8 @@ export default function InfoCard() {
     );
 
   useEffect(() => {
-    if (!timeseries_error && timeseries_data) {
-      const newdata = { ...timeseries_data };
-      console.log(newdata);
-      //setSensorData(newdata);
+    if (timeseries_data) {
+      setSensorData(timeseries_data);
     }
   }, [timeseries_data]);
 
@@ -116,10 +114,10 @@ export default function InfoCard() {
           },
         },
       ],
-      // dataset: {
-      //   source: sensorData,
-      //   dimensions: ["timestamp", "temp", "hum"],
-      // },
+      dataset: {
+        source: sensorData,
+        dimensions: ["timestamp", "temp", "hum"],
+      },
       series: [
         {
           name: "Temp °F",
@@ -144,7 +142,7 @@ export default function InfoCard() {
         },
       ],
     });
-  }, []);
+  }, [sensorData]);
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
