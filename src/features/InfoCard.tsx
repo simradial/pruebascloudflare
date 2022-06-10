@@ -29,7 +29,7 @@ const fetcherseries = async (
   ...args: any[]
 ) => {
   const res = await fetch(input, init);
-  return res.json();
+  return res;
 };
 
 function convertToF(celsius: number) {
