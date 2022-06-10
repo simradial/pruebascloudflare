@@ -42,14 +42,17 @@ export default function InfoCard() {
     [optionObj, setOptionObj] = useState<object>({}),
     [useUTC, setUseUTC] = useState<boolean>(false),
     [sensorData, setSensorData] = useState<any>([[0, 0, 0]]),
-    { data, error } = useSWR("/api/sensor/1", fetchersensor),
+    { data: sensor_data, error: sensor_error } = useSWR(
+      "/api/sensor/1",
+      fetchersensor
+    ),
     { data: timeseries_data, error: timeseries_error } = useSWR(
       "/api/timeseries",
       fetcherseries
     );
 
   useEffect(() => {
-    //console.log("timeseries_data ", timeseries_data);
+    console.log("timeseries_data ", timeseries_data);
     if (timeseries_data) {
       setSensorData(timeseries_data);
     }
@@ -180,25 +183,25 @@ export default function InfoCard() {
             color={"yellow.500"}
             rounded={"full"}
           >
-            {error
+            {sensor_error
               ? "Error loading API"
-              : !data
+              : !sensor_data
               ? "-"
-              : !data.txt
-              ? data.txt
+              : !sensor_data.txt
+              ? sensor_data.txt
               : "TEMPCHECK"}
           </Text>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>Temp</Text>
             <Text fontSize={"6xl"} fontWeight={800}>
-              {!data ? "-" : convertToF(data.temp).toFixed(2)}
+              {!sensor_data ? "-" : convertToF(sensor_data.temp).toFixed(2)}
             </Text>
             <Text color={"gray.500"}>°F</Text>
           </Stack>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"1xl"}>Humidity</Text>
             <Text fontSize={"3xl"} fontWeight={800}>
-              {!data ? "-" : data.hum.toFixed(2)}
+              {!sensor_data ? "-" : sensor_data.hum.toFixed(2)}
             </Text>
             <Text color={"gray.500"}>%</Text>
           </Stack>
@@ -208,9 +211,9 @@ export default function InfoCard() {
           <List spacing={3}>
             <ListItem>
               <ListIcon as={TimeIcon} color="yellow.400" />
-              {!data
+              {!sensor_data
                 ? "-"
-                : DateTime.fromMillis(data.ts)
+                : DateTime.fromMillis(sensor_data.ts)
                     .setZone("America/New_York")
                     .toFormat("yyyy-LL-dd HH:mm:ss ZZZZ")}
             </ListItem>
