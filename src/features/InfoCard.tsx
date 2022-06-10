@@ -15,7 +15,15 @@ import * as echarts from "echarts";
 import ReactECharts from "echarts-for-react";
 import useSWR from "swr";
 
-const fetcher = async (
+const fetchersensor = async (
+  input: RequestInfo,
+  init: RequestInit,
+  ...args: any[]
+) => {
+  const res = await fetch(input, init);
+  return res.json();
+};
+const fetcherseries = async (
   input: RequestInfo,
   init: RequestInit,
   ...args: any[]
@@ -34,14 +42,14 @@ export default function InfoCard() {
     [optionObj, setOptionObj] = useState<object>({}),
     [useUTC, setUseUTC] = useState<boolean>(false),
     [sensorData, setSensorData] = useState<any>([[0, 0, 0]]),
-    { data, error } = useSWR("/api/sensor/1", fetcher),
+    { data, error } = useSWR("/api/sensor/1", fetchersensor),
     { data: timeseries_data, error: timeseries_error } = useSWR(
       "/api/timeseries",
-      fetcher
+      fetcherseries
     );
 
   useEffect(() => {
-    console.log("timeseries_data ", timeseries_data);
+    //console.log("timeseries_data ", timeseries_data);
     if (timeseries_data) {
       setSensorData(timeseries_data);
     }
