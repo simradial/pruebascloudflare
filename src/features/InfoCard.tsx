@@ -215,7 +215,7 @@ export default function InfoCard() {
         <ReactECharts
           theme={theme}
           option={optionObj}
-          style={{ width: "140%", height: "240px" }}
+          style={{ width: "100%", height: "200px" }}
         />
       </Box>
     </Center>
