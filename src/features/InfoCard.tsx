@@ -214,7 +214,7 @@ export default function InfoCard() {
           </Stack>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"} fontWeight={800}>
-              {!sensor_data ? "-" : sensor_data.hum.toFixed(2) + "%"}
+              {!sensor_data ? "-" : sensor_data.hum.toFixed(2) + " %"}
             </Text>
             <Text fontSize={"1xl"} color={"gray.500"}>
               Humidity
