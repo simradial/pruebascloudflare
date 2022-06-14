@@ -52,9 +52,19 @@ export default function InfoCard() {
     );
 
   useEffect(() => {
-    //console.log("timeseries_data ", timeseries_data);
+    console.log("timeseries_data ", timeseries_data);
     if (timeseries_data !== undefined) {
-      setSensorData(timeseries_data);
+      let chartData: any[] = [];
+      timeseries_data.map((objs: any, index: any) =>
+        chartData.push({
+          time: objs._time,
+          temperature: objs.temperature,
+          humidity: objs.humidity,
+          tempf: convertToF(objs.temperature),
+        })
+      );
+      console.log("chartData ", chartData);
+      setSensorData(chartData);
     }
   }, [timeseries_data]);
 
@@ -83,7 +93,6 @@ export default function InfoCard() {
       xAxis: {
         type: "time",
         axisLabel: {
-          rotate: 10,
           formatter: function (tick: any) {
             return echarts.time.format(tick, "{HH}:{mm}", useUTC);
           },
@@ -92,14 +101,14 @@ export default function InfoCard() {
       yAxis: [
         {
           type: "value",
-          name: "Temp °C",
+          name: "Temp °F",
           nameLocation: "middle",
           nameGap: 45,
           min: 0,
           max: 100,
           position: "left",
           axisLabel: {
-            formatter: "{value} °C",
+            formatter: "{value} °F",
           },
         },
         {
@@ -117,17 +126,17 @@ export default function InfoCard() {
       ],
       dataset: {
         source: sensorData,
-        dimensions: ["_time", "temperature", "humidity"],
+        dimensions: ["time", "tempf", "humidity"],
       },
       series: [
         {
-          name: "Temp °C",
+          name: "Temp °F",
           type: "line",
           smooth: false,
           symbol: "none",
           encode: {
-            x: "_time",
-            y: "temperature",
+            x: "time",
+            y: "tempf",
           },
         },
         {
@@ -137,7 +146,7 @@ export default function InfoCard() {
           symbol: "none",
           yAxisIndex: 1,
           encode: {
-            x: "_time",
+            x: "time",
             y: "humidity",
           },
         },
