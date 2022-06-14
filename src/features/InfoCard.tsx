@@ -82,14 +82,10 @@ export default function InfoCard() {
       animation: false,
       xAxis: {
         type: "time",
-        rotate: 10,
         axisLabel: {
+          rotate: 10,
           formatter: function (tick: any) {
-            return echarts.time.format(
-              tick,
-              "{yyyy}-{MM}-{dd} {HH}:{mm}",
-              useUTC
-            );
+            return echarts.time.format(tick, "{HH}:{mm}", useUTC);
           },
         },
       },
