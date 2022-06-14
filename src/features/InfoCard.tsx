@@ -29,7 +29,7 @@ const fetcherseries = async (
   ...args: any[]
 ) => {
   const res = await fetch(input, init);
-  return res.text();
+  return res.json();
 };
 
 function convertToF(celsius: number) {
@@ -58,9 +58,9 @@ export default function InfoCard() {
     }
   }, [timeseries_data]);
 
-  // useEffect(() => {
-  //   console.log("sensorData", sensorData[0]);
-  // }, [sensorData[0]]);
+  useEffect(() => {
+    console.log("sensorData", sensorData[0]);
+  }, [sensorData[0]]);
 
   useEffect(() => {
     setOptionObj({
@@ -130,10 +130,10 @@ export default function InfoCard() {
           },
         },
       ],
-      dataset: {
-        source: sensorData,
-        dimensions: ["timestamp", "temp", "hum"],
-      },
+      // dataset: {
+      //   source: sensorData,
+      //   dimensions: ["timestamp", "temp", "hum"],
+      // },
       series: [
         {
           name: "Temp °F",
