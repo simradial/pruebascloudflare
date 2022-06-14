@@ -52,11 +52,15 @@ export default function InfoCard() {
     );
 
   useEffect(() => {
-    //console.log("timeseries_data ", timeseries_data);
+    console.log("timeseries_data", timeseries_data);
     if (timeseries_data) {
       setSensorData(timeseries_data);
     }
   }, [timeseries_data]);
+
+  useEffect(() => {
+    console.log("sensorData", sensorData);
+  }, [sensorData]);
 
   useEffect(() => {
     setOptionObj({
@@ -126,10 +130,10 @@ export default function InfoCard() {
           },
         },
       ],
-      dataset: {
-        source: sensorData,
-        dimensions: ["timestamp", "temp", "hum"],
-      },
+      // dataset: {
+      //   source: sensorData,
+      //   dimensions: ["timestamp", "temp", "hum"],
+      // },
       series: [
         {
           name: "Temp °F",
