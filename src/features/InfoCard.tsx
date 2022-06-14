@@ -59,8 +59,8 @@ export default function InfoCard() {
   }, [timeseries_data]);
 
   useEffect(() => {
-    console.log("sensorData", sensorData);
-  }, [sensorData]);
+    console.log("sensorData", sensorData[0]);
+  }, [sensorData[0]]);
 
   useEffect(() => {
     setOptionObj({
