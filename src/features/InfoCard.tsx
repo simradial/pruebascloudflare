@@ -167,7 +167,6 @@ export default function InfoCard() {
   return (
     <Center py={6}>
       <Box
-        maxW={"530px"}
         w={"full"}
         bg={useColorModeValue("white", "gray.800")}
         boxShadow={"2xl"}
@@ -226,13 +225,11 @@ export default function InfoCard() {
           </List>
         </Box>
 
-        <Box bg={useColorModeValue("gray.50", "gray.900")} px={6} py={10}>
-          <ReactECharts
-            theme={theme}
-            option={optionObj}
-            style={{ width: "100%", height: "100%" }}
-          />
-        </Box>
+        <ReactECharts
+          theme={theme}
+          option={optionObj}
+          style={{ width: "100%", height: "100%" }}
+        />
       </Box>
     </Center>
   );
