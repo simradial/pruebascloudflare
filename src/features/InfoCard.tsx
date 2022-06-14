@@ -72,6 +72,10 @@ export default function InfoCard() {
 
   useEffect(() => {
     setOptionObj({
+      legend: {
+        data: ["Humidity %", isCelsius ? "Temp °C" : "Temp °F"],
+        inactiveColor: "#777",
+      },
       useUTC: useUTC,
       tooltip: {
         trigger: "axis",
@@ -101,18 +105,6 @@ export default function InfoCard() {
       yAxis: [
         {
           type: "value",
-          name: isCelsius ? "Temp °C" : "Temp °F",
-          nameLocation: "middle",
-          nameGap: 45,
-          min: 0,
-          max: 120,
-          position: "left",
-          axisLabel: {
-            formatter: isCelsius ? "{value} °C" : "{value} °F",
-          },
-        },
-        {
-          type: "value",
           name: "Humidity %",
           nameLocation: "middle",
           nameGap: 45,
@@ -123,12 +115,35 @@ export default function InfoCard() {
             formatter: "{value} %",
           },
         },
+        {
+          type: "value",
+          name: isCelsius ? "Temp °C" : "Temp °F",
+          nameLocation: "middle",
+          nameGap: 45,
+          min: 0,
+          max: 120,
+          position: "left",
+          axisLabel: {
+            formatter: isCelsius ? "{value} °C" : "{value} °F",
+          },
+        },
       ],
       dataset: {
         source: sensorData,
         dimensions: ["time", isCelsius ? "temperature" : "tempf", "humidity"],
       },
       series: [
+        {
+          name: "Humidity %",
+          type: "line",
+          smooth: false,
+          symbol: "none",
+          yAxisIndex: 1,
+          encode: {
+            x: "time",
+            y: "humidity",
+          },
+        },
         {
           name: isCelsius ? "Temp °C" : "Temp °F",
           type: "line",
@@ -137,17 +152,6 @@ export default function InfoCard() {
           encode: {
             x: "time",
             y: isCelsius ? "temperature" : "tempf",
-          },
-        },
-        {
-          name: "% Humidity",
-          type: "line",
-          smooth: false,
-          symbol: "none",
-          yAxisIndex: 1,
-          encode: {
-            x: "time",
-            y: "humidity",
           },
         },
       ],
