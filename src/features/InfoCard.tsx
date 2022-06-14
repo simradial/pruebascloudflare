@@ -62,6 +62,8 @@ export default function InfoCard() {
     console.log("sensorData ", sensorData);
   }, [sensorData]);
 
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   useEffect(() => {
     setOptionObj({
       useUTC: useUTC,
@@ -101,7 +103,7 @@ export default function InfoCard() {
       yAxis: [
         {
           type: "value",
-          name: "Temp °F",
+          name: "Temp °C",
           nameLocation: "middle",
           nameGap: 40,
           min: 0,
@@ -111,7 +113,7 @@ export default function InfoCard() {
           //     lineStyle : {}
           // },
           axisLabel: {
-            formatter: "{value} °F",
+            formatter: "{value} °C",
           },
         },
         {
@@ -136,13 +138,13 @@ export default function InfoCard() {
       },
       series: [
         {
-          name: "Temp °F",
+          name: "Temp °C",
           type: "line",
           smooth: false,
           symbol: "none",
           encode: {
-            x: "timestamp",
-            y: "temp",
+            x: "_time",
+            y: "temperature",
           },
         },
         {
@@ -152,8 +154,8 @@ export default function InfoCard() {
           symbol: "none",
           yAxisIndex: 1,
           encode: {
-            x: "timestamp",
-            y: "hum",
+            x: "_time",
+            y: "humidity",
           },
         },
       ],
