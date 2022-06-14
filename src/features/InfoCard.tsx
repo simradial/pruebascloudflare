@@ -42,6 +42,7 @@ export default function InfoCard() {
   const theme = useColorModeValue("light", "dark"),
     [optionObj, setOptionObj] = useState<object>({}),
     [sensorData, setSensorData] = useState<any>([]),
+    [temp, setTemp] = useState<number>(-1),
     [isCelsius, setIsCelsius] = useState<boolean>(false),
     useUTC = false,
     { data: sensor_data, error: sensor_error } = useSWR(
@@ -52,6 +53,12 @@ export default function InfoCard() {
       "/api/timeseries",
       fetcherseries
     );
+
+  useEffect(() => {
+    if (sensor_data !== undefined) {
+      setTemp(sensor_data.temp);
+    }
+  }, [sensor_data]);
 
   useEffect(() => {
     if (timeseries_data !== undefined) {
@@ -199,7 +206,7 @@ export default function InfoCard() {
           </Text>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"6xl"} fontWeight={800}>
-              {!sensor_data ? "-" : convertToF(sensor_data.temp).toFixed(2)}
+              {!sensor_data ? "-" : convertToF(temp).toFixed(2)}
             </Text>
             <Button onClick={(e) => setIsCelsius(!isCelsius)}>
               <Text color={"gray.500"}>{isCelsius ? "°C" : "°F"}</Text>
