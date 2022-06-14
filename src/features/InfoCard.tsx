@@ -40,8 +40,8 @@ function convertToF(celsius: number) {
 export default function InfoCard() {
   const theme = useColorModeValue("light", "dark"),
     [optionObj, setOptionObj] = useState<object>({}),
-    [useUTC, setUseUTC] = useState<boolean>(false),
     [sensorData, setSensorData] = useState<any>([]),
+    useUTC = false,
     { data: sensor_data, error: sensor_error } = useSWR(
       "/api/sensor/1",
       fetchersensor
@@ -67,9 +67,6 @@ export default function InfoCard() {
   useEffect(() => {
     setOptionObj({
       useUTC: useUTC,
-      title: {
-        text: "Last 24 Hours",
-      },
       tooltip: {
         trigger: "axis",
         axisPointer: {
@@ -77,7 +74,7 @@ export default function InfoCard() {
         },
       },
       toolbox: {
-        show: true,
+        show: false,
         feature: {
           saveAsImage: {},
           dataZoom: {
@@ -97,7 +94,7 @@ export default function InfoCard() {
               useUTC
             );
           },
-          rotate: 10,
+          //rotate: 10,
         },
       },
       yAxis: [
@@ -105,7 +102,7 @@ export default function InfoCard() {
           type: "value",
           name: "Temp °C",
           nameLocation: "middle",
-          nameGap: 40,
+          nameGap: 45,
           min: 0,
           max: 100,
           position: "left",
@@ -120,7 +117,7 @@ export default function InfoCard() {
           type: "value",
           name: "Humidity %",
           nameLocation: "middle",
-          nameGap: 40,
+          nameGap: 45,
           position: "right",
           min: 0,
           max: 100,
@@ -168,6 +165,7 @@ export default function InfoCard() {
     <Center py={6}>
       <Box
         w={"full"}
+        minWidth={480}
         bg={useColorModeValue("white", "gray.800")}
         boxShadow={"2xl"}
         rounded={"xl"}
@@ -212,7 +210,7 @@ export default function InfoCard() {
           </Stack>
         </Stack>
 
-        <Box bg={useColorModeValue("gray.50", "gray.900")} px={6} py={10}>
+        <Box bg={useColorModeValue("gray.50", "gray.900")} p={5}>
           <List spacing={3}>
             <ListItem>
               <ListIcon as={TimeIcon} color="yellow.400" />
@@ -224,12 +222,13 @@ export default function InfoCard() {
             </ListItem>
           </List>
         </Box>
-
-        <ReactECharts
-          theme={theme}
-          option={optionObj}
-          style={{ width: "100%", height: "100%" }}
-        />
+        <Box bg={useColorModeValue("gray.50", "gray.900")}>
+          <ReactECharts
+            theme={theme}
+            option={optionObj}
+            style={{ width: "140%", height: "100%" }}
+          />
+        </Box>
       </Box>
     </Center>
   );
