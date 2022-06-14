@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  Button,
   Box,
   Center,
   Text,
@@ -41,6 +42,7 @@ export default function InfoCard() {
   const theme = useColorModeValue("light", "dark"),
     [optionObj, setOptionObj] = useState<object>({}),
     [sensorData, setSensorData] = useState<any>([]),
+    [isCelsius, setIsCelsius] = useState<boolean>(false),
     useUTC = false,
     { data: sensor_data, error: sensor_error } = useSWR(
       "/api/sensor/1",
@@ -52,7 +54,6 @@ export default function InfoCard() {
     );
 
   useEffect(() => {
-    console.log("timeseries_data ", timeseries_data);
     if (timeseries_data !== undefined) {
       let chartData: any[] = [];
       timeseries_data.map((objs: any, index: any) =>
@@ -63,7 +64,6 @@ export default function InfoCard() {
           tempf: convertToF(objs.temperature),
         })
       );
-      console.log("chartData ", chartData);
       setSensorData(chartData);
     }
   }, [timeseries_data]);
@@ -101,14 +101,14 @@ export default function InfoCard() {
       yAxis: [
         {
           type: "value",
-          name: "Temp °F",
+          name: isCelsius ? "Temp °C" : "Temp °F",
           nameLocation: "middle",
           nameGap: 45,
           min: 0,
-          max: 100,
+          max: 120,
           position: "left",
           axisLabel: {
-            formatter: "{value} °F",
+            formatter: isCelsius ? "{value} °C" : "{value} °F",
           },
         },
         {
@@ -126,17 +126,17 @@ export default function InfoCard() {
       ],
       dataset: {
         source: sensorData,
-        dimensions: ["time", "tempf", "humidity"],
+        dimensions: ["time", isCelsius ? "temperature" : "tempf", "humidity"],
       },
       series: [
         {
-          name: "Temp °F",
+          name: isCelsius ? "Temp °C" : "Temp °F",
           type: "line",
           smooth: false,
           symbol: "none",
           encode: {
             x: "time",
-            y: "tempf",
+            y: isCelsius ? "temperature" : "tempf",
           },
         },
         {
@@ -152,7 +152,7 @@ export default function InfoCard() {
         },
       ],
     });
-  }, [sensorData]);
+  }, [sensorData, isCelsius]);
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -190,18 +190,21 @@ export default function InfoCard() {
               : "TEMPCHECK"}
           </Text>
           <Stack direction={"row"} align={"center"} justify={"center"}>
-            <Text fontSize={"3xl"}>Temp</Text>
             <Text fontSize={"6xl"} fontWeight={800}>
               {!sensor_data ? "-" : convertToF(sensor_data.temp).toFixed(2)}
             </Text>
-            <Text color={"gray.500"}>°F</Text>
+            <Button
+              onClick={(e) => (e.preventDefault(), setIsCelsius(!isCelsius))}
+            >
+              <Text color={"gray.500"}>{isCelsius ? "°C" : "°F"}</Text>
+            </Button>
           </Stack>
           <Stack direction={"row"} align={"center"} justify={"center"}>
-            <Text fontSize={"1xl"}>Humidity</Text>
             <Text fontSize={"3xl"} fontWeight={800}>
               {!sensor_data ? "-" : sensor_data.hum.toFixed(2)}
             </Text>
             <Text color={"gray.500"}>%</Text>
+            <Text fontSize={"1xl"}>Humidity</Text>
           </Stack>
         </Stack>
 
