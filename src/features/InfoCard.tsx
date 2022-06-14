@@ -53,7 +53,7 @@ export default function InfoCard() {
 
   useEffect(() => {
     console.log("timeseries_data", timeseries_data);
-    if (timeseries_data) {
+    if (timeseries_data !== undefined) {
       setSensorData(timeseries_data);
     }
   }, [timeseries_data]);
