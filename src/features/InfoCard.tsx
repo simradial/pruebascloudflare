@@ -191,7 +191,7 @@ export default function InfoCard() {
               ? "Error loading API"
               : !sensor_data
               ? "-"
-              : !sensor_data.txt
+              : sensor_data.txt
               ? sensor_data.txt
               : "TEMPCHECK"}
           </Text>
