@@ -229,7 +229,7 @@ export default function InfoCard() {
               {!sensor_data
                 ? "-"
                 : DateTime.fromMillis(sensor_data.ts)
-                    .setZone("America/New_York")
+                    .setZone("local")
                     .toFormat("yyyy-LL-dd HH:mm:ss ZZZZ")}
             </ListItem>
           </List>
