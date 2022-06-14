@@ -73,6 +73,7 @@ export default function InfoCard() {
   useEffect(() => {
     setOptionObj({
       legend: {
+        y: 10,
         data: ["Humidity %", isCelsius ? "Temp °C" : "Temp °F"],
         inactiveColor: "#777",
       },
@@ -84,8 +85,10 @@ export default function InfoCard() {
         },
       },
       grid: {
-        y: 40,
+        y: 50,
         y2: 40,
+        x: 70,
+        x2: 70,
       },
       toolbox: {
         show: false,
@@ -235,7 +238,7 @@ export default function InfoCard() {
         <ReactECharts
           theme={theme}
           option={optionObj}
-          style={{ width: "130%", height: "240px" }}
+          style={{ width: "130%", height: "260px" }}
         />
       </Box>
     </Center>
