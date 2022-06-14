@@ -52,6 +52,6 @@ export async function onRequestGet({ params, env }) {
     }
   });
   sensorDataStr += "]";
-  let sensor: any = JSON.parse(sensorDataStr);
-  return new Response(JSON.stringify(sensor));
+  //let sensor: any = JSON.parse(sensorDataStr);
+  return new Response(sensorDataStr);
 }

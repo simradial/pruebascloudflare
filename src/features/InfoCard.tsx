@@ -29,7 +29,7 @@ const fetcherseries = async (
   ...args: any[]
 ) => {
   const res = await fetch(input, init);
-  return res.json();
+  return res.text();
 };
 
 function convertToF(celsius: number) {
@@ -41,7 +41,7 @@ export default function InfoCard() {
   const theme = useColorModeValue("light", "dark"),
     [optionObj, setOptionObj] = useState<object>({}),
     [useUTC, setUseUTC] = useState<boolean>(false),
-    [sensorData, setSensorData] = useState<any>([[0, 0, 0]]),
+    [sensorData, setSensorData] = useState<string>("[[0, 0, 0]]"),
     { data: sensor_data, error: sensor_error } = useSWR(
       "/api/sensor/1",
       fetchersensor
@@ -53,9 +53,9 @@ export default function InfoCard() {
 
   useEffect(() => {
     console.log("timeseries_data", timeseries_data);
-    // if (timeseries_data) {
-    //   setSensorData([...timeseries_data]);
-    // }
+    if (timeseries_data) {
+      setSensorData(timeseries_data);
+    }
   }, [timeseries_data]);
 
   // useEffect(() => {
@@ -130,10 +130,10 @@ export default function InfoCard() {
           },
         },
       ],
-      // dataset: {
-      //   source: sensorData,
-      //   dimensions: ["timestamp", "temp", "hum"],
-      // },
+      dataset: {
+        source: sensorData,
+        dimensions: ["timestamp", "temp", "hum"],
+      },
       series: [
         {
           name: "Temp °F",
