@@ -202,18 +202,18 @@ export default function InfoCard() {
               {!sensor_data
                 ? "-"
                 : isCelsius
-                ? sensor_data.temp.toFixed(2)
-                : convertToF(sensor_data.temp).toFixed(2)}
+                ? sensor_data.temp.toFixed(2) + "°"
+                : convertToF(sensor_data.temp).toFixed(2) + "°"}
             </Text>
             <Button onClick={(e) => setIsCelsius(!isCelsius)}>
-              <Text color={"gray.500"}>{isCelsius ? "°C" : "°F"}</Text>
+              <Text color={"gray.500"}>{isCelsius ? "C" : "F"}</Text>
             </Button>
           </Stack>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"} fontWeight={800}>
-              {!sensor_data ? "-" : sensor_data.hum.toFixed(2)}
+              {!sensor_data ? "-" : sensor_data.hum.toFixed(2) + "%"}
             </Text>
-            <Text color={"gray.500"}>%</Text>
+
             <Text fontSize={"1xl"}>Humidity</Text>
           </Stack>
         </Stack>
