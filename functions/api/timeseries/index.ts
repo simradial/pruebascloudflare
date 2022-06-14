@@ -52,5 +52,12 @@ export async function onRequestGet({ params, env }) {
     }
   });
   sensorDataStr += "]";
-  return new Response(sensorDataStr);
+
+  return new Response(
+    JSON.stringify({
+      Status: 200,
+      headers: { "Content-Type": "application/json" },
+      Message: JSON.stringify(sensorDataStr),
+    })
+  );
 }
