@@ -171,7 +171,7 @@ export default function InfoCard() {
     <Center py={6}>
       <Box
         w={"full"}
-        minWidth={[280, 480]}
+        minWidth={[360, 480, 640]}
         bg={useColorModeValue("white", "gray.800")}
         boxShadow={"2xl"}
         rounded={"xl"}
@@ -238,7 +238,7 @@ export default function InfoCard() {
         <ReactECharts
           theme={theme}
           option={optionObj}
-          style={{ width: "130%", height: "260px" }}
+          style={{ width: "100%", height: "260px" }}
         />
       </Box>
     </Center>
