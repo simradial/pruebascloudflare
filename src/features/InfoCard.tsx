@@ -83,6 +83,10 @@ export default function InfoCard() {
           type: "cross",
         },
       },
+      grid: {
+        y: 40,
+        y2: 40,
+      },
       toolbox: {
         show: false,
         feature: {
