@@ -193,9 +193,7 @@ export default function InfoCard() {
             <Text fontSize={"6xl"} fontWeight={800}>
               {!sensor_data ? "-" : convertToF(sensor_data.temp).toFixed(2)}
             </Text>
-            <Button
-              onClick={(e) => (e.preventDefault(), setIsCelsius(!isCelsius))}
-            >
+            <Button onClick={(e) => setIsCelsius(!isCelsius)}>
               <Text color={"gray.500"}>{isCelsius ? "°C" : "°F"}</Text>
             </Button>
           </Stack>
