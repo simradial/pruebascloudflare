@@ -213,8 +213,9 @@ export default function InfoCard() {
             <Text fontSize={"3xl"} fontWeight={800}>
               {!sensor_data ? "-" : sensor_data.hum.toFixed(2) + "%"}
             </Text>
-
-            <Text fontSize={"1xl"}>Humidity</Text>
+            <Text fontSize={"1xl"} color={"gray.500"}>
+              Humidity
+            </Text>
           </Stack>
         </Stack>
 
