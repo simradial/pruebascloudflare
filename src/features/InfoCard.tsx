@@ -52,15 +52,11 @@ export default function InfoCard() {
     );
 
   useEffect(() => {
-    console.log("timeseries_data ", timeseries_data);
+    //console.log("timeseries_data ", timeseries_data);
     if (timeseries_data !== undefined) {
       setSensorData(timeseries_data);
     }
   }, [timeseries_data]);
-
-  useEffect(() => {
-    console.log("sensorData ", sensorData);
-  }, [sensorData]);
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -94,7 +90,6 @@ export default function InfoCard() {
               useUTC
             );
           },
-          //rotate: 10,
         },
       },
       yAxis: [
@@ -106,9 +101,6 @@ export default function InfoCard() {
           min: 0,
           max: 100,
           position: "left",
-          // axisLine : {
-          //     lineStyle : {}
-          // },
           axisLabel: {
             formatter: "{value} °C",
           },
@@ -121,9 +113,6 @@ export default function InfoCard() {
           position: "right",
           min: 0,
           max: 100,
-          // axisLine : {
-          //     lineStyle : {}
-          // },
           axisLabel: {
             formatter: "{value} %",
           },

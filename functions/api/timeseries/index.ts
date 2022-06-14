@@ -38,21 +38,6 @@ export async function onRequestGet({ params, env }) {
   }
   const csvString = await influxResponse.text();
   const results = Papa.parse(csvString, { header: true });
-  const resultsData: any = results.data;
-  // let sensorDataStr: string = "[";
-  // results.data.forEach((d: any): void => {
-  //   const ts = d["timestamp"];
-  //   if (ts !== null && ts !== undefined) {
-  //     if (sensorDataStr.length !== 1) {
-  //       sensorDataStr += ",";
-  //     }
-  //     const tempF = (d["temperature"] * 9.0) / 5.0 + 32.0;
-  //     sensorDataStr += `[new Date(${1000 * ts}), ${tempF.toFixed(2)}, ${
-  //       d["humidity"]
-  //     }]`;
-  //   }
-  // });
-  // sensorDataStr += "]";
-  let sensor: any = JSON.stringify(resultsData);
-  return new Response(sensor);
+  let timesseries = JSON.stringify(results.data);
+  return new Response(timesseries);
 }
