@@ -15,6 +15,7 @@ import { DateTime } from "luxon";
 import * as echarts from "echarts";
 import ReactECharts from "echarts-for-react";
 import useSWR from "swr";
+import { Helmet } from "react-helmet";
 
 const fetchersensor = async (
   input: RequestInfo,
@@ -169,6 +170,15 @@ export default function InfoCard() {
 
   return (
     <Center py={6}>
+      <Helmet>
+        <title>
+          {!sensor_data
+            ? "-"
+            : isCelsius
+            ? sensor_data.temp.toFixed(2) + "°"
+            : convertToF(sensor_data.temp).toFixed(2) + "°"}
+        </title>
+      </Helmet>
       <Box
         w={"full"}
         minWidth={[360, 480, 640]}
